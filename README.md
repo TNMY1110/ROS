@@ -1,6 +1,6 @@
 # ROS development
-ubuntu 20.04.6
-ROS neotic
+- ubuntu 20.04.6
+- ROS neotic
 
 # ROS install
 source list
@@ -62,7 +62,9 @@ catkin_make
 - angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0, 우를 누르면 -2.0이 된다
 
 # 토픽 목록 확인
-bj@ubuntu:~$ rostopic list
+```bash
+$ rostopic list
+```
 /rosout
 /rosout_agg
 /turtle1/cmd_vel
@@ -70,17 +72,25 @@ bj@ubuntu:~$ rostopic list
 /turtle1/pose
 
 # 토픽 메시지 타입 확인
-bj@ubuntu:~$ rostopic type /turtle1/cmd_vel
+```bash
+$ rostopic type /turtle1/cmd_vel
+```
 geometry_msgs/Twist
 
-bj@ubuntu:~$ rostopic type /turtle1/color_sensor
+```bash
+$ rostopic type /turtle1/color_sensor
+```
 turtlesim/Color
 
-bj@ubuntu:~$ rostopic type /turtle1/pose
+```bash
+$ rostopic type /turtle1/pose
+```
 turtlesim/Pose
 
 # 토픽 메시지 구조 확인
-bj@ubuntu:~$ rosmsg show geometry_msgs/Twist
+```bash
+$ rosmsg show geometry_msgs/Twist
+```
 geometry_msgs/Vector3 linear
   float64 x
   float64 y
@@ -90,12 +100,16 @@ geometry_msgs/Vector3 angular
   float64 y
   float64 z
 
-bj@ubuntu:~$ rosmsg show turtlesim/Color
+```bash
+$ rosmsg show turtlesim/Color
+```
 uint8 r 
 uint8 g 
 uint8 b 
 
-bj@ubuntu:~$ rosmsg show turtlesim/Pose
+```bash
+$ rosmsg show turtlesim/Pose
+```
 float32 x
 float32 y
 float32 theta
@@ -104,12 +118,12 @@ float32 angular_velocity
 
 ## turtlesim 토픽 정리
 ### /turtle1/cmd_vel (geometry_msgs/Twist)
-linear
+1. linear
 - x: 직진 속도 (앞/뒤)
 - y: 좌/우 이동 (사용 안 함)
 - z: 상/하 이동 (사용 안 함)
 
-angular
+2. angular
 - x: Roll (사용 안 함)
 - y: Pitch (사용 안 함)
 - z: 회전 속도 (좌/우 회전)
@@ -131,20 +145,16 @@ angular
 - '[linear.x, linear.y, linear.z]' '[angular.x, angular.y, angular.z]'
 
 ## 명령어
-1. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+```bash
+$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+```
 publishing and latching message for 3.0 seconds
-2. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
+```bash
+$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
+```
 publishing and latching message for 3.0 seconds
-3. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
-publishing and latching message for 3.0 seconds
-4. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
-publishing and latching message for 3.0 seconds
-5. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
-publishing and latching message for 3.0 seconds
-6. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
-publishing and latching message for 3.0 seconds
-7. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
-publishing and latching message for 3.0 seconds
+
+- 총 4회 반복
 
 ## 결과
 1. x축으로 2 이동
@@ -158,20 +168,31 @@ publishing and latching message for 3.0 seconds
 # turtlesim 2개 동시 실행
 ## 명령어
 ### 터미널 1
-- $ roscore
+```bash
+$ roscore
+```
 
 ### 터미널 2
-- $ rosrun turtlesim turtlesim_node
+```bash
+$ rosrun turtlesim turtlesim_node
+```
 
 ### 터미널 3
-- $ rosrun turtlesim turtlesim_node __name:=my_turtle
+```bash
+$ rosrun turtlesim turtlesim_node __name:=my_turtle
+```
 
 ### 터미널 4
-- $ rostopic info /turtle1/cmd_vel
+```bash
+$ rostopic info /turtle1/cmd_vel
+```
+### 결과
+- 두 거북이가 동시에 움직임.
 
-두 거북이가 동시에 움직임.
+```bash
+$ rostopic info /turtle1/cmd_vel
+```
 
-bj@ubuntu:~$ rostopic info /turtle1/cmd_vel
 Type: geometry_msgs/Twist
 
 Publishers: 
