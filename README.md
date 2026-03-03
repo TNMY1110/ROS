@@ -55,11 +55,11 @@ catkin_make
 ```
 
 # turtle/pose 관찰
-x: 거북이의 X 좌표. 윈도우 창 기준 우측으로 이동하면 값이 증가
-y: 거북이의 Y 좌표. 윈도우 창 기준 상단으로 이동하면 값이 증가
-theta: 거북이의 방향 (라디안). 좌회전하면 값이 증가, 우회전하면 감소
-linear_velocity: 현재 속도. 방향키 상하를 누르면 2.0이 된다
-angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0, 우를 누르면 -2.0이 된다
+- x: 거북이의 X 좌표. 윈도우 창 기준 우측으로 이동하면 값이 증가
+- y: 거북이의 Y 좌표. 윈도우 창 기준 상단으로 이동하면 값이 증가
+- theta: 거북이의 방향 (라디안). 좌회전하면 값이 증가, 우회전하면 감소
+- linear_velocity: 현재 속도. 방향키 상하를 누르면 2.0이 된다
+- angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0, 우를 누르면 -2.0이 된다
 
 # 토픽 목록 확인
 bj@ubuntu:~$ rostopic list
@@ -126,3 +126,33 @@ angular
 - theta: 방향
 - linear_velocity: 현재 직진 속도
 - angular_velocity: 현재 회전 속도
+
+# 정사각형 그리기
+- '[linear.x, linear.y, linear.z]' '[angular.x, angular.y, angular.z]'
+
+## 명령어
+1. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+publishing and latching message for 3.0 seconds
+2. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
+publishing and latching message for 3.0 seconds
+3. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+publishing and latching message for 3.0 seconds
+4. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
+publishing and latching message for 3.0 seconds
+5. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+publishing and latching message for 3.0 seconds
+6. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[0.0, 0.0, 0.0]' '[0.0, 0.0, 1.56]'
+publishing and latching message for 3.0 seconds
+7. bj@ubuntu:~$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+publishing and latching message for 3.0 seconds
+
+## 결과
+1. x축으로 2 이동
+2. 좌로 약 90도 회전
+3. y축으로 2 이동
+4. 좌로 약 90도 회전
+5. x축으로 -2 이동
+6. 좌로 약 90도 회전
+7. y축으로 -2 이동
+
+ 
