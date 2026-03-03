@@ -155,4 +155,29 @@ publishing and latching message for 3.0 seconds
 6. 좌로 약 90도 회전
 7. y축으로 -2 이동
 
+# turtlesim 2개 동시 실행
+## 명령어
+### 터미널 1
+- $ roscore
+
+### 터미널 2
+- $ rosrun turtlesim turtlesim_node
+
+### 터미널 3
+- $ rosrun turtlesim turtlesim_node __name:=my_turtle
+
+### 터미널 4
+- $ rostopic info /turtle1/cmd_vel
+
+두 거북이가 동시에 움직임.
+
+bj@ubuntu:~$ rostopic info /turtle1/cmd_vel
+Type: geometry_msgs/Twist
+
+Publishers: 
+ * /teleop_turtle (http://ubuntu:38617/)
+
+Subscribers: 
+ * /my_turtle (http://ubuntu:35419/)
+ * /turtlesim (http://ubuntu:43123/)
  
