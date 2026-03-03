@@ -65,11 +65,11 @@ catkin_make
 ```bash
 $ rostopic list
 ```
-/rosout
-/rosout_agg
-/turtle1/cmd_vel
-/turtle1/color_sensor
-/turtle1/pose
+* /rosout
+* /rosout_agg
+* /turtle1/cmd_vel
+* /turtle1/color_sensor
+* /turtle1/pose
 
 # 토픽 메시지 타입 확인
 ```bash
@@ -91,30 +91,30 @@ turtlesim/Pose
 ```bash
 $ rosmsg show geometry_msgs/Twist
 ```
-geometry_msgs/Vector3 linear
-  float64 x
-  float64 y
-  float64 z
-geometry_msgs/Vector3 angular
-  float64 x
-  float64 y
-  float64 z
+* geometry_msgs/Vector3 linear
+  - float64 x
+  - float64 y
+  - float64 z
+* geometry_msgs/Vector3 angular
+  - float64 x
+  - float64 y
+  - float64 z
 
 ```bash
 $ rosmsg show turtlesim/Color
 ```
-uint8 r 
-uint8 g 
-uint8 b 
+- uint8 r 
+- uint8 g 
+- uint8 b 
 
 ```bash
 $ rosmsg show turtlesim/Pose
 ```
-float32 x
-float32 y
-float32 theta
-float32 linear_velocity
-float32 angular_velocity
+- float32 x
+- float32 y
+- float32 theta
+- float32 linear_velocity
+- float32 angular_velocity
 
 ## turtlesim 토픽 정리
 ### /turtle1/cmd_vel (geometry_msgs/Twist)
