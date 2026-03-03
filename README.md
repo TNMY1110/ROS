@@ -184,7 +184,7 @@ $ rosrun turtlesim turtlesim_node __name:=my_turtle
 
 ### 터미널 4
 ```bash
-$ rostopic info /turtle1/cmd_vel
+$ rosrun turtlesim turtle_teleop_key
 ```
 ### 결과
 - 두 거북이가 동시에 움직임.
