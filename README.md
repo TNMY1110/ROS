@@ -60,3 +60,69 @@ y: 거북이의 Y 좌표. 윈도우 창 기준 상단으로 이동하면 값이 
 theta: 거북이의 방향 (라디안). 좌회전하면 값이 증가, 우회전하면 감소
 linear_velocity: 현재 속도. 방향키 상하를 누르면 2.0이 된다
 angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0, 우를 누르면 -2.0이 된다
+
+# 토픽 목록 확인
+bj@ubuntu:~$ rostopic list
+/rosout
+/rosout_agg
+/turtle1/cmd_vel
+/turtle1/color_sensor
+/turtle1/pose
+
+# 토픽 메시지 타입 확인
+bj@ubuntu:~$ rostopic type /turtle1/cmd_vel
+geometry_msgs/Twist
+
+bj@ubuntu:~$ rostopic type /turtle1/color_sensor
+turtlesim/Color
+
+bj@ubuntu:~$ rostopic type /turtle1/pose
+turtlesim/Pose
+
+# 토픽 메시지 구조 확인
+bj@ubuntu:~$ rosmsg show geometry_msgs/Twist
+geometry_msgs/Vector3 linear
+  float64 x
+  float64 y
+  float64 z
+geometry_msgs/Vector3 angular
+  float64 x
+  float64 y
+  float64 z
+
+bj@ubuntu:~$ rosmsg show turtlesim/Color
+uint8 r 
+uint8 g 
+uint8 b 
+
+bj@ubuntu:~$ rosmsg show turtlesim/Pose
+float32 x
+float32 y
+float32 theta
+float32 linear_velocity
+float32 angular_velocity
+
+## turtlesim 토픽 정리
+### /turtle1/cmd_vel (geometry_msgs/Twist)
+linear
+- x: 직진 속도 (앞/뒤)
+- y: 좌/우 이동 (사용 안 함)
+- z: 상/하 이동 (사용 안 함)
+
+angular
+- x: Roll (사용 안 함)
+- y: Pitch (사용 안 함)
+- z: 회전 속도 (좌/우 회전)
+
+
+### /turtle1/color_sensor (turtlesim/Color)
+- r: 빨강(0~255)
+- g: 초록(0~255)
+- b: 파랑(0~255)
+
+### /turtle1/pose (turtlesim/Pose)
+- x: 거북이의 X 좌표
+- y: 거북이의 Y 좌표
+- theta: 방향
+- linear_velocity: 현재 직진 속도
+- angular_velocity: 현재 회전 속도
