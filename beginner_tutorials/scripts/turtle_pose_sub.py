@@ -3,8 +3,10 @@ import rospy
 from turtlesim.msg import Pose
 
 def callback(msg):
-    rospy.loginfo("위치 수신: x = %f, y = %f", msg.x, msg.y)
-    if msg.x <= 1.0 or msg.x >= 10.0 or msg.y <= 1.0 or msg.y >= 10.0 :
+    poseX = msg.x
+    poseY = msg.y
+    rospy.loginfo("위치 수신: x = %f, y = %f", poseX, poseY)
+    if poseX <= 1.0 or poseX >= 10.0 or poseY <= 1.0 or poseY >= 10.0 :
         rospy.loginfo("경고! 벽이 가깝습니다!")
 
 def listener():
