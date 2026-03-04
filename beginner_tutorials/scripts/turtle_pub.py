@@ -4,7 +4,7 @@ from geometry_msgs.msg import Twist
 
 def turtlerun():
     pub = rospy.Publisher('/turtle1/cmd_vel', Twist, queue_size=10)
-    rospy.init_node('geometry_msgs')
+    rospy.init_node('turtle_move_circle')
     rate = rospy.Rate(1)  # 1Hz = 1초에 1번
     move = Twist()
     
