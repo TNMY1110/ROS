@@ -3,7 +3,7 @@ import rospy
 from beginner_tutorials.srv import AddTwoInts, AddTwoIntsResponse
 
 def handle_calc(req):
-    op = rospy.get_param('operator', 'add')
+    op = rospy.get_param('/operator', 'add')
 
     if op == 'add':
         result = req.a + req.b
