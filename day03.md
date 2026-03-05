@@ -58,3 +58,10 @@ float32 theta
 float32 linear_velocity 
 
 float32 angular_velocity 
+
+## 선택적 기록과 필터링
+|항목|all_topics.bag|cmd_only.bag|
+|---|---|---|
+|토픽 수|4|1|
+|메시지 수|1228|6|
+|파일 크기|93.8kb|6.5kb|
