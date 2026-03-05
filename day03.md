@@ -39,3 +39,18 @@ rosbag play -l ./bag/my_turtle.bag
 <!-- 여기에 재생 결과 스크린샷을 넣으세요 -->
 ![rosbag play 재생 결과](screenshots/rosbag_record_04.png)
 ![rosbag play 재생 결과](screenshots/rosbag_play_03.png)
+
+## 재생 데이터를 Subscriber로 수신
+### 토픽 메시지 타입 확인
+```bash
+rostopic type /turtle1/pose
+```
+turtlesim/Pose
+```bash
+rosmsg show turtlesim/Pose
+```
+float32 x 
+float32 y 
+float32 theta 
+float32 linear_velocity 
+float32 angular_velocity 
