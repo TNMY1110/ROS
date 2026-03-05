@@ -59,6 +59,7 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
   FILES
   AddTwoInts.srv
+  StringLength.srv
 #   Service1.srv
 #   Service2.srv
 )
@@ -166,6 +167,14 @@ include_directories(
  catkin_install_python(PROGRAMS
    scripts/talker.py
    scripts/listener.py
+   scripts/temp_pub.py
+   scripts/temp_sub.py
+   scripts/counter_pub.py
+   scripts/counter_sub.py
+   scripts/turtle_pose_sub.py
+   scripts/turtle_pub.py
+   scripts/add_two_ints_server.py
+   scripts/add_two_ints_client.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
