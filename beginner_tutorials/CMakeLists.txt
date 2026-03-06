@@ -12,6 +12,8 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  actionlib              # 추가
+  actionlib_msgs         # 추가
 )
 
 ## System dependencies are found with CMake's conventions
@@ -65,16 +67,18 @@ add_service_files(
 )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
+add_action_files(
+   FILES
+   Timer.action
 #   Action1.action
 #   Action2.action
-# )
+)
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
   std_msgs
+  actionlib_msgs         # 추가
 )
 
 ################################################
@@ -107,9 +111,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+  CATKIN_DEPENDS message_runtime std_msgs
+  CATKIN_DEPENDS actionlib_msgs std_msgs  # 추가
 #  INCLUDE_DIRS include
 #  LIBRARIES beginner_tutorials
-CATKIN_DEPENDS message_runtime
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
@@ -175,6 +180,8 @@ include_directories(
    scripts/turtle_pub.py
    scripts/add_two_ints_server.py
    scripts/add_two_ints_client.py
+   scripts/timer_server.py
+   scripts/timer_client.py
    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
  )
 
