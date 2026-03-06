@@ -18,10 +18,16 @@ def timer_client(seconds):
 
     rospy.loginfo("%d초 타이머 시작!", seconds)
     client.send_goal(goal, feedback_cb=feedback_cb)
+    try:
+        while not rospy.is_shutdown():
+            if client.wait_for_result(rospy.Duration(0.5)):
+                break
 
-    while not rospy.is_shutdown():
-        if client.wait_for_result(rospy.Duration(0.5)):
-            break
+    except KeyboardInterrupt:
+        rospy.logwarn("사용자 종료 감지! 서버에 취소 신호를 보냅니다.")
+        client.cancel_goal()
+        rospy.sleep(1.0)
+        sys.exit(0)
 
     if client.get_state() != actionlib.GoalStatus.SUCCEEDED:
         client.cancel_goal()
@@ -30,14 +36,18 @@ def timer_client(seconds):
     print("ctrl + c 대기")
 
     result = client.get_result()
-    if result.success:
-        rospy.loginfo("완료! 총 %d초 소요", result.elapsed_seconds)
+    if result is not None:
+        if result.success:
+            rospy.loginfo("완료! 총 %d초 소요", result.elapsed_seconds)
+        else:
+            rospy.logwarn("타이머 실패")
+    
     else:
-        rospy.logwarn("타이머 실패 또는 취소")
+        rospy.logerr("서버로부터 결과를 받지 못했습니다. (작업 취소됨)")
 
 if __name__ == '__main__':
     rospy.init_node('timer_client')
-    seconds = int(sys.argv[1]) if len(sys.argv) > 1 else 100
+    seconds = int(sys.argv[1]) if len(sys.argv) > 1 else 20
     timer_client(seconds)
 
 # rostopic pub /timer/cancel actionlib_msgs/GoalID -- {}
