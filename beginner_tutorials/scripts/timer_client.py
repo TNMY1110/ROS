@@ -18,16 +18,10 @@ def timer_client(seconds):
 
     rospy.loginfo("%d초 타이머 시작!", seconds)
     client.send_goal(goal, feedback_cb=feedback_cb)
-    try:
-        while not rospy.is_shutdown():
-            if client.wait_for_result(rospy.Duration(0.5)):
-                break
-
-    except KeyboardInterrupt:
-        rospy.logwarn("사용자 종료 감지! 서버에 취소 신호를 보냅니다.")
-        client.cancel_goal()
-        rospy.sleep(1.0)
-        sys.exit(0)
+    
+    while not rospy.is_shutdown():
+        if client.wait_for_result(rospy.Duration(0.5)):
+            break
 
     if client.get_state() != actionlib.GoalStatus.SUCCEEDED:
         client.cancel_goal()
