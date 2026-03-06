@@ -54,6 +54,6 @@ actionlib은 실행 중인 요청을 선점하고 예상대로 요청이 제 시
 
 ## 실습
 ### Timer.action
-![Timer.action](action/Timer.action)
-![timer_server.py](scripts/timer_server.py)
-![timer_client.py](scripts/timer_client.py)
+[Timer.action](action/Timer.action)
+[timer_server.py](scripts/timer_server.py)
+[timer_client.py](scripts/timer_client.py)
