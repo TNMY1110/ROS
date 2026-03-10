@@ -16,5 +16,5 @@
 ![/scan_filtered — 필터 후](mastering_ros_robot_description_pkg/img/LiDAR%20Sensor%20Setting_06.png)
 
 ## 필터 효과 비교
-![/scan — 원본](mastering_ros_robot_description_pkg/img/LiDAR%20Sensor%20Setting_07.png)
-![/scan_filtered — 필터 후](mastering_ros_robot_description_pkg/img/LiDAR%20Sensor%20Setting_08.png)
+![/scan — 원본](mastering_ros_robot_description_pkg/img/LiDAR%20Sensor%20Setting_08.png)
+![/scan_filtered — 필터 후](mastering_ros_robot_description_pkg/img/LiDAR%20Sensor%20Setting_09.png)
