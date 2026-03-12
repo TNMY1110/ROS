@@ -110,7 +110,7 @@ class WallFollowerPID:
             # 오른쪽에 실제로 벽이 있었을 때만 HOLE 처리
             twist = Twist()
             twist.linear.x = LINEAR_SPEED * 0.5
-            twist.angular.z = 0.1
+            twist.angular.z = 0.2
             self.pub.publish(twist)
             rospy.loginfo("HOLE 감지 - 강제 좌회전 | 오차: %.3f", error)
 
