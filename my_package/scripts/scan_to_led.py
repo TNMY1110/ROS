@@ -16,23 +16,42 @@ class LedController:
         self.regions = {}
         self.rate = rospy.Rate(10)
 
+
+    def filter_data(self, data_list):
+        # 0.0(오류값)이나 inf를 제외하고 유효한 데이터만 필터링
+        # 유효한 데이터가 하나도 없으면 10.0(안전거리)을 반환
+        valid_data = [x for x in data_list if x > 0.12] # LDS 최소 측정거리 0.12m
+        return valid_data if valid_data else [10.0]    
+
     def scan_callback(self, scan):
+        if len(scan.ranges) < 360:
+            return
+
+        # 현 코드상으로 필요없긴 한데 일단 방향 범위 나눠놓음
+        front_range = scan.ranges[0:45] + scan.ranges[315:360]
+        left_range  = scan.ranges[45:135]
+        back_range  = scan.ranges[135:225]
+        right_range = scan.ranges[225:315]
+
         self.regions = {
-            'right':       min(min(scan.ranges[0:72]),   10), # 영역 5개로 나눔, 10은 최솟값
-            'front_right': min(min(scan.ranges[72:144]), 10),
-            'front':       min(min(scan.ranges[144:216]), 10),
-            'front_left':  min(min(scan.ranges[216:288]), 10),
-            'left':        min(min(scan.ranges[288:360]), 10),
-        }
+            'front':  min(self.filter_data(front_range)),
+            'left':   min(self.filter_data(left_range)),
+            'back':   min(self.filter_data(back_range)),
+            'right':  min(self.filter_data(right_range)),
+            } 
 
     def cmd_callback(self, twist):
-        # 근접 상태가 아닐 때만 이동 방향으로 판단
+        # 방향에 상관없이 가장 가까운 거리에 따라 불이 들어옴
         if self.regions and min(self.regions.values()) < DIST_THRESHOLD:
             self.publish_led('red')
+
+        # 전진 중이라면 초록
         elif twist.linear.x > 0:
-            self.publish_led('blue')
-        elif twist.linear.x < 0:
             self.publish_led('green')
+
+        # 후진 중이라면 파랑
+        elif twist.linear.x < 0:
+            self.publish_led('blue')
 
     def publish_led(self, color):
         msg = String()
